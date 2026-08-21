@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens — "balanced fusion": Apple's structural restraint,
+   Octave's warm editorial palette. One accent (deep pine/sage), warm paper
+   canvas, near-black ink. Risk colors (red/amber/green) are semantic and
+   used only for findings/tags, never as decoration.
+   ========================================================================== */
+
+:root {
+  --color-ink: #17181b;
+  --color-ink-soft: #585c53;
+  --color-ink-faint: #8a8d82;
+
+  --color-paper: #faf8f3;
+  --color-paper-dim: #f2efe6;
+  --color-paper-raised: #ffffff;
+
+  --color-line: #d9d2bd;
+  --color-line-strong: #c2b89e;
+
+  --color-accent: #2f5d4c;
+  --color-accent-strong: #21453a;
+  --color-accent-soft: #e8efe9;
+
+  --color-amber: #b9812f;
+  --color-amber-soft: #f6ecda;
+
+  --color-red: #b8412a;
+  --color-red-soft: #f6e5df;
+
+  --color-green: #3c8d6b;
+  --color-green-soft: #e6f0ea;
+
+  --shadow-raised: 0 1px 2px rgba(23, 24, 27, 0.04), 0 12px 32px -16px rgba(23, 24, 27, 0.16);
+  --shadow-floating: 0 24px 64px -24px rgba(23, 24, 27, 0.28);
+
+  /* Self-hosted via @fontsource-variable/fraunces (imported in layout.tsx) —
+     kept independent of next/font/google so builds never depend on
+     reaching fonts.googleapis.com. */
+  --font-fraunces: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-faint: var(--color-ink-faint);
+
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-paper-raised: var(--color-paper-raised);
+
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+
+  --color-accent: var(--color-accent);
+  --color-accent-strong: var(--color-accent-strong);
+  --color-accent-soft: var(--color-accent-soft);
+
+  --color-amber: var(--color-amber);
+  --color-amber-soft: var(--color-amber-soft);
+
+  --color-red: var(--color-red);
+  --color-red-soft: var(--color-red-soft);
+
+  --color-green: var(--color-green);
+  --color-green-soft: var(--color-green-soft);
+
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-fraunces);
+  --font-mono: var(--font-geist-mono);
+
+  --container-page: 1180px;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+/* Slim, brand-colored scrollbar everywhere (instead of the OS default) —
+   applies to the page and to any inner scrollable region (e.g. the
+   overflow-x-auto tab strip on narrow viewports). */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-line-strong);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-ink-faint);
+}
+
+/* Fully hidden scrollbar for elements that scroll horizontally as an
+   interaction affordance (e.g. the report mockup's tab strip) rather
+   than as a document-style scroll region — content still scrolls via
+   touch/trackpad/wheel, the bar itself just never renders. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Focus ring — consistent, visible, never suppressed */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Ambient background gradient — the single moving field behind every
+   section. Kept to transform/opacity only so it stays cheap to composite.
+   ========================================================================== */
+
+@keyframes drift-a {
+  0% { transform: translate3d(-6%, -8%, 0) scale(1); }
+  50% { transform: translate3d(4%, 6%, 0) scale(1.12); }
+  100% { transform: translate3d(-6%, -8%, 0) scale(1); }
+}
+
+@keyframes drift-b {
+  0% { transform: translate3d(5%, 4%, 0) scale(1.05); }
+  50% { transform: translate3d(-6%, -5%, 0) scale(0.95); }
+  100% { transform: translate3d(5%, 4%, 0) scale(1.05); }
+}
+
+@keyframes drift-c {
+  0% { transform: translate3d(0%, 6%, 0) scale(1); }
+  50% { transform: translate3d(-4%, -4%, 0) scale(1.08); }
+  100% { transform: translate3d(0%, 6%, 0) scale(1); }
+}
+
+.bg-blob-a { animation: drift-a 46s ease-in-out infinite; }
+.bg-blob-b { animation: drift-b 54s ease-in-out infinite; }
+.bg-blob-c { animation: drift-c 60s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-blob-a,
+  .bg-blob-b,
+  .bg-blob-c {
+    animation: none;
+  }
+}
