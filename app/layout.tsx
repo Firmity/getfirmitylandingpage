@@ -11,11 +11,11 @@ import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://firmity.in";
-// GTM container ID — same container as firmity.in (see gtm-setup-react.md).
-// Not secret (it ships in every page's HTML either way), so it's safe to
-// default here; NEXT_PUBLIC_GTM_ID still overrides for staging/other envs.
-const gtmId = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-T27H73H4";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://firmity.co";
+// GTM container ID for firmity.co. Not secret (it ships in every page's
+// HTML either way), so it's safe to default here; NEXT_PUBLIC_GTM_ID still
+// overrides for staging/other envs.
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-NGQHKRF7";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" id="top">
-        {/* GTM — same container as firmity.in. See gtm-setup-react.md. */}
+        {/* GTM — firmity.co container. See gtm-setup-react.md. */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

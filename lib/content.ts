@@ -189,7 +189,7 @@ export const cmmsBridge = {
     title: "See how the software works",
     body: "Once you've seen your report, take a look at the system that turns findings into follow-through, with no pressure and no obligation.",
     ctaLabel: "See How Firmity CMMS Works →",
-    ctaHref: "https://firmity.in/features",
+    ctaHref: "https://firmity.co/features",
   },
 };
 
