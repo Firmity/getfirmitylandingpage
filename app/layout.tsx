@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 // Self-hosted variable font (woff2 shipped in the package, no network
 // fetch at build time) — see globals.css for the --font-fraunces token.
 import "@fontsource-variable/fraunces/full.css";
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
