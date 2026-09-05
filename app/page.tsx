@@ -9,6 +9,7 @@ import { CmmsBridge } from "@/components/CmmsBridge";
 import { LeadForm } from "@/components/LeadForm";
 import { Privacy } from "@/components/Privacy";
 import { FAQ } from "@/components/FAQ";
+import { ComparisonImage } from "@/components/ComparisonImage";
 import { FinalCTA } from "@/components/FinalCTA";
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
       <Privacy />
       <FAQ />
       <FinalCTA />
+      <ComparisonImage />
     </>
   );
 }

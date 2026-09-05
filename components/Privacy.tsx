@@ -7,7 +7,7 @@ import { privacy } from "@/lib/content";
 
 export function Privacy() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-10 sm:py-14">
       <Container>
         <div className="flex items-end justify-between gap-10">
           <Reveal className="max-w-[46ch]">

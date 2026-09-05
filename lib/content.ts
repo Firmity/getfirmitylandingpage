@@ -272,6 +272,15 @@ export const faq = {
   ],
 };
 
+// Source graphic for this section is the design team's approved Footer.png
+// asset, embedded as-is (see ComparisonImage.tsx) rather than rebuilt with
+// site components.
+export const comparisonImage = {
+  eyebrow: "The Difference Firmity Makes",
+  h2: "What changes when you get assessed.",
+  alt: "Comparison graphic: without Firmity, facilities face unnoticed issues, higher costs and unexpected downtime; with Firmity, they get lower costs, proactive checks and smooth operations.",
+};
+
 export const finalCta = {
   h2: "Your facility deserves a health check.",
   body: "Whether you run a residential community, a corporate office, or a manufacturing plant, knowing exactly where you stand keeps it running at its best.",

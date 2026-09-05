@@ -5,7 +5,7 @@ import { howItWorks } from "@/lib/content";
 
 export function HowItWorks() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-10 sm:py-14">
       <Container>
         <Reveal className="max-w-[46ch]">
           <SectionEyebrow>{howItWorks.eyebrow}</SectionEyebrow>

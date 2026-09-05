@@ -16,6 +16,13 @@ import {
   HeartPulse,
   GraduationCap,
   Hotel,
+  Search,
+  TrendingDown,
+  TrendingUp,
+  Clock,
+  ClipboardCheck,
+  XCircle,
+  CheckCircle2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -42,6 +49,13 @@ export const iconMap: Record<string, LucideIcon> = {
   "heart-pulse": HeartPulse,
   "graduation-cap": GraduationCap,
   hotel: Hotel,
+  search: Search,
+  "trending-down": TrendingDown,
+  "trending-up": TrendingUp,
+  clock: Clock,
+  "clipboard-check": ClipboardCheck,
+  "x-circle": XCircle,
+  "check-circle": CheckCircle2,
 };
 
 export function getIcon(name: string): LucideIcon {

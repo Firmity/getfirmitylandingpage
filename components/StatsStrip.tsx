@@ -5,7 +5,7 @@ import { statsStrip } from "@/lib/content";
 
 export function StatsStrip() {
   return (
-    <section className="border-y border-line py-16 sm:py-20">
+    <section className="border-y border-line py-8 sm:py-10">
       <Container>
         <div className="grid gap-10 sm:grid-cols-3 sm:divide-x sm:divide-line">
           {statsStrip.map((s, i) => (

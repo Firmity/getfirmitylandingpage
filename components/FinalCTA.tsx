@@ -7,7 +7,7 @@ import { finalCta } from "@/lib/content";
 export function FinalCTA() {
   return (
     <section
-      className="relative overflow-hidden py-24 sm:py-28"
+      className="relative overflow-hidden py-12 sm:py-16"
       style={{
         background:
           "linear-gradient(135deg, var(--color-accent-strong) 0%, #1c332b 55%, var(--color-ink) 100%)",

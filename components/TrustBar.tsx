@@ -4,7 +4,7 @@ import { trustBar } from "@/lib/content";
 
 export function TrustBar() {
   return (
-    <div className="border-y border-line py-10 sm:py-12">
+    <div className="border-y border-line py-6 sm:py-8">
       <Container>
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-5">
           {trustBar.map((t) => {

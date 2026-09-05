@@ -87,7 +87,7 @@ export function LeadForm() {
   }
 
   return (
-    <section id="lead-form" className="py-20 sm:py-28">
+    <section id="lead-form" className="py-10 sm:py-14">
       <Container className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <Reveal>
           <SectionEyebrow tone="amber">{leadForm.eyebrow}</SectionEyebrow>

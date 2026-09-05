@@ -8,7 +8,7 @@ import { deliverable } from "@/lib/content";
 
 export function Deliverable() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-10 sm:py-14">
       <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1fr] lg:gap-16">
         <Reveal>
           <SectionEyebrow tone="amber">{deliverable.eyebrow}</SectionEyebrow>

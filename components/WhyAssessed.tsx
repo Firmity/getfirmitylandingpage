@@ -19,7 +19,7 @@ const riskIconBg: Record<RiskLevel, string> = {
 
 export function WhyAssessed() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-10 sm:py-14">
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_260px] lg:gap-16">
           <Reveal>

@@ -12,7 +12,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-10 sm:py-14">
       <Container className="max-w-[780px]">
         <Reveal>
           <SectionEyebrow>{faq.eyebrow}</SectionEyebrow>

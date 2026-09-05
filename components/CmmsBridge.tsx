@@ -7,7 +7,7 @@ import { cmmsBridge } from "@/lib/content";
 
 export function CmmsBridge() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-10 sm:py-14">
       <Container className="grid items-start gap-14 lg:grid-cols-[1fr_0.85fr] lg:gap-16">
         <div>
           <Reveal>
