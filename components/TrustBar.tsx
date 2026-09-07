@@ -12,7 +12,13 @@ export function TrustBar() {
             return (
               <div key={t.label} className="flex flex-col items-center gap-3.5 text-center">
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent text-paper shadow-[var(--shadow-raised)]">
-                  <Icon className="h-6 w-6" fill="currentColor" stroke="none" />
+                  {/* Filled rendering (fill=currentColor, stroke=none) turns
+                      these particular Lucide glyphs (Home, Building2,
+                      Factory, HeartPulse, GraduationCap, Hotel) into solid
+                      blobs — their paths are drawn for stroking, not filling,
+                      so overlapping linework collapses into one shape. Render
+                      as clean white line icons instead. */}
+                  <Icon className="h-6 w-6" strokeWidth={1.75} />
                 </span>
                 <span className="max-w-[13ch] font-sans text-[12px] font-semibold uppercase leading-tight tracking-[0.06em] text-ink-soft">
                   {t.label}

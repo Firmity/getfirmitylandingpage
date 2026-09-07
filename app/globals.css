@@ -1,10 +1,17 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Design tokens — "balanced fusion": Apple's structural restraint,
-   Octave's warm editorial palette. One accent (deep pine/sage), warm paper
-   canvas, near-black ink. Risk colors (red/amber/green) are semantic and
-   used only for findings/tags, never as decoration.
+   Design tokens. Full palette swapped 2026-09 to match Firmity-Website-'s
+   blue / white / black identity ("colors of the entire site should follow
+   the blue white and black that we have in the slideshow, we dont want the
+   beige or the forest green anywhere") — shadows/spacing/fonts held over
+   unchanged. Was a warm cream/tan editorial palette with a forest-green
+   accent (#faf8f3/#d9d2bd paper+line, #2f5d4c/#21453a accent); now a cool
+   white canvas with blue-gray borders and Firmity-Website-'s blue scale
+   (#114dac/#2b6cb0/#63b3ed).
+   Risk colors (red/amber/green) stay semantic, used only for findings/tags
+   (high/medium/low, success/error), never as decoration, so they're
+   untouched by this swap.
    ========================================================================== */
 
 :root {
@@ -12,16 +19,21 @@
   --color-ink-soft: #585c53;
   --color-ink-faint: #8a8d82;
 
-  --color-paper: #faf8f3;
-  --color-paper-dim: #f2efe6;
+  --color-paper: #f7f9fc;
+  --color-paper-dim: #eef2f7;
   --color-paper-raised: #ffffff;
 
-  --color-line: #d9d2bd;
-  --color-line-strong: #c2b89e;
+  --color-line: #dbe2ea;
+  --color-line-strong: #b8c4d1;
 
-  --color-accent: #2f5d4c;
-  --color-accent-strong: #21453a;
-  --color-accent-soft: #e8efe9;
+  --color-accent: #114dac;
+  --color-accent-strong: #0e3e8a;
+  --color-accent-soft: #e5edf8;
+  /* Extra blue tones only Firmity-Website-'s 3-tier scale needs — the site's
+     own components still use the three tokens above; these two exist for
+     the ported HeroSlideshow (and anything else matching that palette). */
+  --color-accent-mid: #2b6cb0;
+  --color-accent-light: #63b3ed;
 
   --color-amber: #b9812f;
   --color-amber-soft: #f6ecda;
@@ -56,6 +68,8 @@
   --color-accent: var(--color-accent);
   --color-accent-strong: var(--color-accent-strong);
   --color-accent-soft: var(--color-accent-soft);
+  --color-accent-mid: var(--color-accent-mid);
+  --color-accent-light: var(--color-accent-light);
 
   --color-amber: var(--color-amber);
   --color-amber-soft: var(--color-amber-soft);

@@ -9,21 +9,23 @@ export function FinalCTA() {
     <section
       className="relative overflow-hidden py-12 sm:py-16"
       style={{
+        // 2026-09: full palette swap to blue/white/black — deep blue into
+        // ink black, replacing the old pine-green gradient.
         background:
-          "linear-gradient(135deg, var(--color-accent-strong) 0%, #1c332b 55%, var(--color-ink) 100%)",
+          "linear-gradient(135deg, var(--color-accent-strong) 0%, #0a2f6b 55%, var(--color-ink) 100%)",
       }}
     >
-      {/* warm amber glow, upper-left — a note of warmth against the cool pine base */}
+      {/* light-blue glow, upper-left — echoes the page-wide ambient gradient */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-[10%] -top-[25%] h-[480px] w-[600px] rounded-full opacity-[0.35] blur-[120px]"
-        style={{ background: "radial-gradient(circle, var(--color-amber) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%)" }}
       />
-      {/* cool accent glow, lower-right — echoes the page-wide ambient gradient */}
+      {/* black glow, lower-right — deepens toward the gradient's ink base */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-[10%] bottom-[-30%] h-[520px] w-[640px] rounded-full opacity-[0.4] blur-[120px]"
-        style={{ background: "radial-gradient(circle, var(--color-green) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, var(--color-ink) 0%, transparent 70%)" }}
       />
 
       {/* brand watermark: the logo, inverted (black -> white) and dimmed way down */}

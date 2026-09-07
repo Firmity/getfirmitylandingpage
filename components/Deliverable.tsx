@@ -11,7 +11,7 @@ export function Deliverable() {
     <section className="py-10 sm:py-14">
       <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1fr] lg:gap-16">
         <Reveal>
-          <SectionEyebrow tone="amber">{deliverable.eyebrow}</SectionEyebrow>
+          <SectionEyebrow tone="accent">{deliverable.eyebrow}</SectionEyebrow>
           <h2 className="mt-4 max-w-[20ch] font-serif text-[32px] font-medium leading-[1.15] text-ink sm:text-[38px]">
             {deliverable.h2}
           </h2>

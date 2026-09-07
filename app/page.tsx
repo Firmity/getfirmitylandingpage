@@ -1,4 +1,4 @@
-import { Hero } from "@/components/Hero";
+import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { TrustBar } from "@/components/TrustBar";
 import { WhyAssessed } from "@/components/WhyAssessed";
 import { StatsStrip } from "@/components/StatsStrip";
@@ -15,7 +15,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <HeroSlideshow />
       <TrustBar />
       <WhyAssessed />
       <StatsStrip />

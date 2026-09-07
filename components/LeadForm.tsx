@@ -90,7 +90,7 @@ export function LeadForm() {
     <section id="lead-form" className="py-10 sm:py-14">
       <Container className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <Reveal>
-          <SectionEyebrow tone="amber">{leadForm.eyebrow}</SectionEyebrow>
+          <SectionEyebrow tone="accent">{leadForm.eyebrow}</SectionEyebrow>
           <h2 className="mt-4 max-w-[18ch] font-serif text-[32px] font-medium leading-[1.15] text-ink sm:text-[38px]">
             {leadForm.h2}
           </h2>
