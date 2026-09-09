@@ -205,8 +205,32 @@ export const leadForm = {
   formTitle: "Schedule My Free Assessment",
   formNote: "Takes under 2 minutes.",
   submitLabel: "Schedule My Free Assessment",
-  successMessage: "Thanks! We'll reach out within 24 hours to schedule your visit.",
   errorMessage: "Something went wrong. Please try again, or call us directly.",
+};
+
+export const thankYou = {
+  eyebrow: "Thank You!",
+  h1: "You're all set. Your assessment is booked.",
+  sub: "We've received your details and a certified surveyor is being assigned to your property. Most visits get scheduled within 2–3 working days.",
+  steps: [
+    {
+      num: "01",
+      title: "We review your details",
+      body: "Our team checks your property type and location to assign the right surveyor.",
+    },
+    {
+      num: "02",
+      title: "You get a call within 24 hours",
+      body: "We'll confirm a convenient visit slot on your authorised contact number.",
+    },
+    {
+      num: "03",
+      title: "Your report arrives in 10 minutes",
+      body: "After the on-site visit, our AI turns the survey into a complete Facility Health Report.",
+    },
+  ],
+  trustLines: ["100% free, no cost at any stage", "No obligation to buy Firmity software afterward"],
+  ctaLabel: "Back to Home",
 };
 
 export const propertyTypes = [

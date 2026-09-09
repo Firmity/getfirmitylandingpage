@@ -34,7 +34,10 @@ export function Header() {
             className="h-9 w-auto sm:h-10"
           />
         </a>
-        <Button href="#lead-form" variant="outline" className="!px-5 !py-2.5 text-[14px]">
+        {/* Absolute path + hash (not a bare "#lead-form") so this still
+            works from pages other than "/" that don't have that section,
+            e.g. /thank-you — browsers resolve the hash after navigating. */}
+        <Button href="/#lead-form" variant="outline" className="!px-5 !py-2.5 text-[14px]">
           Free Assessment →
         </Button>
       </Container>

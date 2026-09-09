@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Check, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { Reveal } from "@/components/ui/Reveal";
@@ -29,12 +30,13 @@ const INITIAL_STATE: FormState = {
   fcity: "",
 };
 
-type SubmitStatus = { kind: "idle" } | { kind: "success"; message: string } | { kind: "error"; message: string };
+type SubmitStatus = { kind: "idle" } | { kind: "error"; message: string };
 
 const inputClass =
   "w-full rounded-xl border border-line bg-paper-raised px-4 py-3 text-[15px] text-ink placeholder:text-ink-faint transition-colors focus:border-accent";
 
 export function LeadForm() {
+  const router = useRouter();
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
   const [status, setStatus] = useState<SubmitStatus>({ kind: "idle" });
   const [submitting, setSubmitting] = useState(false);
@@ -77,13 +79,16 @@ export function LeadForm() {
         city: form.fcity,
       });
 
-      setStatus({ kind: "success", message: leadForm.successMessage });
       setForm(INITIAL_STATE);
+      // Leave `submitting` true (and skip the finally reset below via
+      // return) so the button stays disabled/labelled "Submitting…"
+      // through the navigation instead of flashing back to normal.
+      router.push("/thank-you");
+      return;
     } catch {
       setStatus({ kind: "error", message: leadForm.errorMessage });
-    } finally {
-      setSubmitting(false);
     }
+    setSubmitting(false);
   }
 
   return (
@@ -226,23 +231,13 @@ export function LeadForm() {
               {submitting ? "Submitting…" : leadForm.submitLabel}
             </Button>
 
-            {status.kind !== "idle" && (
+            {status.kind === "error" && (
               <div
                 role="status"
-                className={`mt-4 flex items-start gap-2 rounded-xl px-3.5 py-3 text-[13.5px] ${
-                  status.kind === "success" ? "bg-green-soft text-green" : "bg-red-soft text-red"
-                }`}
+                className="mt-4 flex items-start gap-2 rounded-xl bg-red-soft px-3.5 py-3 text-[13.5px] text-red"
               >
-                <span
-                  className={`mt-[1px] flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${
-                    status.kind === "success" ? "bg-green" : "bg-red"
-                  }`}
-                >
-                  {status.kind === "success" ? (
-                    <Check className="h-2.5 w-2.5 text-paper" strokeWidth={3} />
-                  ) : (
-                    <X className="h-2.5 w-2.5 text-paper" strokeWidth={3} />
-                  )}
+                <span className="mt-[1px] flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red">
+                  <X className="h-2.5 w-2.5 text-paper" strokeWidth={3} />
                 </span>
                 {status.message}
               </div>
