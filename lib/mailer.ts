@@ -1,27 +1,29 @@
 import nodemailer from "nodemailer";
 
 /**
- * Delivers lead submissions to a real inbox via Gmail SMTP. Kept isolated
- * from the route handler so the external-call surface (transporter setup,
- * timeout, retries) lives in one place.
+ * Delivers lead submissions to a real inbox via Gmail SMTP. Kept isolated from
+ * the route handler so the external-call surface (transporter setup,
+ * timeout) lives in one place.
  *
  * Required env: EMAIL_USER, EMAIL_PASS (a Gmail App Password, not the
- * account password), RECEIVER_EMAIL. If any are missing, sendLeadEmail
+ * account password). Optional: RECEIVER_EMAIL (defaults to DEFAULT_RECEIVER). If any are missing, sendLeadEmail
  * resolves to false immediately rather than throwing, so the caller can
- * fall back gracefully (see app/api/leads/facility-survey/route.ts).
+ * fall back gracefully (see lib/leadDelivery.ts).
  */
 
-export type LeadEmailPayload = {
-  name: string;
-  phone: string;
-  email: string;
-  property_name: string;
-  property_type: string;
-  city: string;
-  source?: string;
+export type LeadEmail = {
+  /** Heading inside the email body. */
+  title: string;
+  /** Subject line; CR/LF are stripped before sending. */
+  subject: string;
+  replyTo: string;
+  rows: Array<[string, string]>;
 };
 
 const SEND_TIMEOUT_MS = 8000;
+
+/** Inbox that receives every lead unless RECEIVER_EMAIL overrides it. */
+export const DEFAULT_RECEIVER = "firmity9@gmail.com";
 
 let cachedTransporter: ReturnType<typeof nodemailer.createTransport> | null = null;
 
@@ -56,12 +58,17 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
+/** Strips CR/LF so user input can never inject extra mail headers via the subject. */
+function singleLine(value: string): string {
+  return value.replace(/[\r\n]+/g, " ").trim();
+}
+
 /**
  * Sends one lead as an email to RECEIVER_EMAIL. Returns true on confirmed
  * delivery, false on any failure or missing config, never throws.
  */
-export async function sendLeadEmail(lead: LeadEmailPayload, requestId: string): Promise<boolean> {
-  const receiver = process.env.RECEIVER_EMAIL;
+export async function sendLeadEmail(lead: LeadEmail, requestId: string): Promise<boolean> {
+  const receiver = process.env.RECEIVER_EMAIL || DEFAULT_RECEIVER;
   const transporter = getTransporter();
 
   if (!transporter || !receiver) {
@@ -69,32 +76,23 @@ export async function sendLeadEmail(lead: LeadEmailPayload, requestId: string): 
     return false;
   }
 
-  const rows: Array<[string, string]> = [
-    ["Name", lead.name],
-    ["Phone", lead.phone],
-    ["Email", lead.email],
-    ["Property", lead.property_name],
-    ["Property type", lead.property_type],
-    ["City", lead.city],
-    ["Source", lead.source ?? "landing_page_survey"],
-  ];
-
+  const rows = lead.rows;
   const text = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
   const html = `
     <div style="font-family:sans-serif;font-size:14px;color:#17181b;">
-      <h2 style="margin:0 0 16px;">New Facility Health Assessment Request</h2>
+      <h2 style="margin:0 0 16px;">${escapeHtml(lead.title)}</h2>
       <table cellpadding="6" cellspacing="0" style="border-collapse:collapse;">
         ${rows
           .map(
             ([label, value]) => `
           <tr>
-            <td style="color:#585c53;font-weight:600;vertical-align:top;">${escapeHtml(label)}</td>
+            <td style="color:#4a5568;font-weight:600;vertical-align:top;">${escapeHtml(label)}</td>
             <td>${escapeHtml(value)}</td>
           </tr>`
           )
           .join("")}
       </table>
-      <p style="color:#8a8d82;font-size:12px;margin-top:16px;">Request ID: ${requestId}</p>
+      <p style="color:#718096;font-size:12px;margin-top:16px;">Request ID: ${requestId}</p>
     </div>
   `;
 
@@ -103,8 +101,8 @@ export async function sendLeadEmail(lead: LeadEmailPayload, requestId: string): 
       transporter.sendMail({
         from: `"Firmity Website" <${process.env.EMAIL_USER}>`,
         to: receiver,
-        replyTo: lead.email,
-        subject: `New Facility Assessment Request from ${lead.property_name}`,
+        replyTo: lead.replyTo,
+        subject: singleLine(lead.subject),
         text,
         html,
       }),

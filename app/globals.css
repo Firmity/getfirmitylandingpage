@@ -1,26 +1,18 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Design tokens. Full palette swapped 2026-09 to match Firmity-Website-'s
-   blue / white / black identity ("colors of the entire site should follow
-   the blue white and black that we have in the slideshow, we dont want the
-   beige or the forest green anywhere") — shadows/spacing/fonts held over
-   unchanged. Was a warm cream/tan editorial palette with a forest-green
-   accent (#faf8f3/#d9d2bd paper+line, #2f5d4c/#21453a accent); now a cool
-   white canvas with blue-gray borders and Firmity-Website-'s blue scale
-   (#114dac/#2b6cb0/#63b3ed).
-   Risk colors (red/amber/green) stay semantic, used only for findings/tags
-   (high/medium/low, success/error), never as decoration, so they're
-   untouched by this swap.
+   Design tokens. Blue / white / black only. Flat tints for section bands,
+   no gradients, no decorative blobs. Risk colours (red/amber/green) stay
+   semantic: form errors and status only, never decoration.
    ========================================================================== */
 
 :root {
-  --color-ink: #17181b;
-  --color-ink-soft: #585c53;
-  --color-ink-faint: #8a8d82;
+  --color-ink: #0b1220;
+  --color-ink-soft: #4a5568;
+  --color-ink-faint: #718096;
 
-  --color-paper: #f7f9fc;
-  --color-paper-dim: #eef2f7;
+  --color-paper: #ffffff;
+  --color-paper-dim: #f1f5fb;
   --color-paper-raised: #ffffff;
 
   --color-line: #dbe2ea;
@@ -29,28 +21,26 @@
   --color-accent: #114dac;
   --color-accent-strong: #0e3e8a;
   --color-accent-soft: #e5edf8;
-  /* Extra blue tones only Firmity-Website-'s 3-tier scale needs — the site's
-     own components still use the three tokens above; these two exist for
-     the ported HeroSlideshow (and anything else matching that palette). */
   --color-accent-mid: #2b6cb0;
   --color-accent-light: #63b3ed;
+
+  /* Near-black navy for the closing band and footer. */
+  --color-night: #0a1426;
 
   --color-amber: #b9812f;
   --color-amber-soft: #f6ecda;
 
   --color-red: #b8412a;
-  --color-red-soft: #f6e5df;
+  --color-red-soft: #fbeceb;
 
   --color-green: #3c8d6b;
   --color-green-soft: #e6f0ea;
 
-  --shadow-raised: 0 1px 2px rgba(23, 24, 27, 0.04), 0 12px 32px -16px rgba(23, 24, 27, 0.16);
-  --shadow-floating: 0 24px 64px -24px rgba(23, 24, 27, 0.28);
+  --shadow-raised: 0 1px 2px rgba(11, 18, 32, 0.04), 0 12px 32px -16px rgba(11, 18, 32, 0.16);
+  --shadow-floating: 0 24px 64px -24px rgba(11, 18, 32, 0.28);
 
-  /* Self-hosted via @fontsource-variable/fraunces (imported in layout.tsx) —
-     kept independent of next/font/google so builds never depend on
-     reaching fonts.googleapis.com. */
-  --font-fraunces: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
+  /* Legacy token: only the older, now-unused components reference it. */
+  --font-fraunces: ui-serif, Georgia, "Times New Roman", serif;
 }
 
 @theme inline {
@@ -70,6 +60,8 @@
   --color-accent-soft: var(--color-accent-soft);
   --color-accent-mid: var(--color-accent-mid);
   --color-accent-light: var(--color-accent-light);
+
+  --color-night: var(--color-night);
 
   --color-amber: var(--color-amber);
   --color-amber-soft: var(--color-amber-soft);
@@ -167,37 +159,7 @@ body {
   }
 }
 
-/* ==========================================================================
-   Ambient background gradient — the single moving field behind every
-   section. Kept to transform/opacity only so it stays cheap to composite.
-   ========================================================================== */
-
-@keyframes drift-a {
-  0% { transform: translate3d(-6%, -8%, 0) scale(1); }
-  50% { transform: translate3d(4%, 6%, 0) scale(1.12); }
-  100% { transform: translate3d(-6%, -8%, 0) scale(1); }
-}
-
-@keyframes drift-b {
-  0% { transform: translate3d(5%, 4%, 0) scale(1.05); }
-  50% { transform: translate3d(-6%, -5%, 0) scale(0.95); }
-  100% { transform: translate3d(5%, 4%, 0) scale(1.05); }
-}
-
-@keyframes drift-c {
-  0% { transform: translate3d(0%, 6%, 0) scale(1); }
-  50% { transform: translate3d(-4%, -4%, 0) scale(1.08); }
-  100% { transform: translate3d(0%, 6%, 0) scale(1); }
-}
-
-.bg-blob-a { animation: drift-a 46s ease-in-out infinite; }
-.bg-blob-b { animation: drift-b 54s ease-in-out infinite; }
-.bg-blob-c { animation: drift-c 60s ease-in-out infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  .bg-blob-a,
-  .bg-blob-b,
-  .bg-blob-c {
-    animation: none;
-  }
+/* Keep the focus ring visible on the dark closing band and footer. */
+.bg-night :focus-visible {
+  outline-color: var(--color-accent-light);
 }

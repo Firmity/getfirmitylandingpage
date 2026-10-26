@@ -1,61 +1,35 @@
-"use client";
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
-import { Reveal } from "@/components/ui/Reveal";
-import { faq } from "@/lib/content";
+import { faq } from "@/lib/landing";
 
+/**
+ * Native <details>: keyboard and screen-reader behaviour for free, zero JS.
+ * `pending` items (answers the content doc still needs) are not rendered.
+ */
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const items = faq.items.filter((item) => !item.pending && item.q && item.a);
+  if (items.length === 0) return null;
 
   return (
-    <section className="py-10 sm:py-14">
-      <Container className="max-w-[780px]">
-        <Reveal>
-          <SectionEyebrow>{faq.eyebrow}</SectionEyebrow>
-          <h2 className="mt-4 font-serif text-[32px] font-medium leading-[1.15] text-ink sm:text-[38px]">
-            {faq.h2}
-          </h2>
-        </Reveal>
+    <section id="faq" className="scroll-mt-16 border-b border-line bg-white py-12 sm:py-14">
+      <Container className="grid gap-8 lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-12">
+        <h2 className="text-[30px] font-bold leading-[1.1] tracking-[-0.03em] text-ink sm:text-[38px]">
+          {faq.heading}
+        </h2>
 
-        <div className="mt-10 divide-y divide-line border-t border-b border-line">
-          {faq.items.map((item, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <div key={item.q}>
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
-                >
-                  <span className="text-[16px] font-medium text-ink">{item.q}</span>
-                  <motion.span
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-paper"
-                  >
-                    <Plus className="h-4 w-4" strokeWidth={2.5} />
-                  </motion.span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="pb-5 pr-10 text-[15px] leading-[1.6] text-ink-soft">{item.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+        <div className="border-t border-line">
+          {items.map((item) => (
+            <details key={item.q} className="group border-b border-line">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-[17px] font-semibold tracking-[-0.01em] text-ink [&::-webkit-details-marker]:hidden">
+                {item.q}
+                <Plus
+                  aria-hidden="true"
+                  className="h-5 w-5 shrink-0 text-accent transition-transform duration-150 group-open:rotate-45"
+                />
+              </summary>
+              <p className="max-w-[62ch] pb-5 text-[15.5px] leading-[1.6] text-ink-soft">{item.a}</p>
+            </details>
+          ))}
         </div>
       </Container>
     </section>

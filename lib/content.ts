@@ -209,27 +209,26 @@ export const leadForm = {
 };
 
 export const thankYou = {
-  eyebrow: "Thank You!",
-  h1: "You're all set. Your assessment is booked.",
-  sub: "We've received your details and a certified surveyor is being assigned to your property. Most visits get scheduled within 2–3 working days.",
+  h1: "Thank you. Your request is in.",
+  sub: "We have your details. A Firmity specialist will reply within 24 hours to fix a time that suits you.",
   steps: [
     {
       num: "01",
-      title: "We review your details",
-      body: "Our team checks your property type and location to assign the right surveyor.",
+      title: "We read your request",
+      body: "We note the module you chose and prepare for your kind of facility.",
     },
     {
       num: "02",
-      title: "You get a call within 24 hours",
-      body: "We'll confirm a convenient visit slot on your authorised contact number.",
+      title: "We reply within 24 hours",
+      body: "Expect a call or WhatsApp on the number you shared, to agree a time.",
     },
     {
       num: "03",
-      title: "Your report arrives in 10 minutes",
-      body: "After the on-site visit, our AI turns the survey into a complete Facility Health Report.",
+      title: "You see Firmity on your facility",
+      body: "A session on the modules that matter most to you, with time for your questions.",
     },
   ],
-  trustLines: ["100% free, no cost at any stage", "No obligation to buy Firmity software afterward"],
+  trustLines: ["Free consultation", "No obligation"],
   ctaLabel: "Back to Home",
 };
 

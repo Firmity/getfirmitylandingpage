@@ -3,14 +3,10 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
-// Self-hosted variable font (woff2 shipped in the package, no network
-// fetch at build time) — see globals.css for the --font-fraunces token.
-import "@fontsource-variable/fraunces/full.css";
-import "@fontsource-variable/fraunces/full-italic.css";
 import "./globals.css";
-import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { meta } from "@/lib/landing";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://firmity.co";
 // GTM container ID for firmity.co. Not secret (it ships in every page's
@@ -20,13 +16,11 @@ const gtmId = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-NGQHKRF7";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Firmity | Free AI Facility Health Assessment",
-  description:
-    "A certified surveyor inspects your property across 14 critical areas. Our AI turns it into a complete Facility Health Report in 10 minutes. 100% free, no sales call required.",
+  title: meta.title,
+  description: meta.description,
   openGraph: {
-    title: "Firmity | Free AI Facility Health Assessment",
-    description:
-      "Find out the real health of your facility before it costs you. Free Facility Health Report in 10 minutes.",
+    title: meta.title,
+    description: meta.description,
     url: siteUrl,
     siteName: "Firmity",
     locale: "en_IN",
@@ -34,13 +28,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Firmity | Free AI Facility Health Assessment",
-    description: "Free Facility Health Report in 10 minutes. 100% free, no sales call required.",
+    title: meta.title,
+    description: meta.description,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f9fc",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -70,9 +64,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           />
         </noscript>
 
-        <BackgroundGradient />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
         <Analytics />
       </body>

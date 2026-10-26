@@ -1,33 +1,21 @@
-import { HeroSlideshow } from "@/components/HeroSlideshow";
-import { TrustBar } from "@/components/TrustBar";
-import { WhyAssessed } from "@/components/WhyAssessed";
-import { StatsStrip } from "@/components/StatsStrip";
-import { HowItWorks } from "@/components/HowItWorks";
-import { Deliverable } from "@/components/Deliverable";
-import { Testimonial } from "@/components/Testimonial";
-import { CmmsBridge } from "@/components/CmmsBridge";
-import { LeadForm } from "@/components/LeadForm";
-import { Privacy } from "@/components/Privacy";
+import { Hero } from "@/components/landing/Hero";
+import { TrustStrip } from "@/components/landing/TrustStrip";
+import { Modules } from "@/components/landing/Modules";
+import { Testimonials } from "@/components/landing/Testimonials";
 import { FAQ } from "@/components/FAQ";
-import { ComparisonImage } from "@/components/ComparisonImage";
-import { FinalCTA } from "@/components/FinalCTA";
+import { ClosingCTA } from "@/components/landing/ClosingCTA";
+import { SurveyStrip } from "@/components/landing/SurveyStrip";
 
 export default function Home() {
   return (
     <>
-      <HeroSlideshow />
-      <TrustBar />
-      <WhyAssessed />
-      <StatsStrip />
-      <HowItWorks />
-      <Deliverable />
-      <Testimonial />
-      <CmmsBridge />
-      <LeadForm />
-      <Privacy />
+      <Hero />
+      <TrustStrip />
+      <Modules />
+      <Testimonials />
       <FAQ />
-      <FinalCTA />
-      <ComparisonImage />
+      <ClosingCTA />
+      <SurveyStrip />
     </>
   );
 }
